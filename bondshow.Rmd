@@ -1,0 +1,39 @@
+---
+title: "债券型私募基金的业绩跟踪"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 说明
+
+本文基于私募排排网公布的数据进行整理出图。
+ 
+
+1）在2018年3月，参考板块指数市场强度：中证全债指数> 沪深300指数 。所以同是混合型基金，高配债券的国泰双利基金、鹏华信用基金明显跑赢高配股票的东方红京东大数据基金和招商制造混合基金。
+ 
+2）在2018年3月，SHIBOR延续下跌，显示资金面宽松；美元兑换人民币汇率延续下跌，显示人民币延续升值。所以配置美元债券的华安美元基金与鹏华全球基金明显弱势。
+ 
+3）截止到2018年3月底，国债、金融债与企业债板块涨幅趋同。
+ 
+
+
+### 样本基金与基金总体的对比
+
+```{r , fig.height=10, fig.width=14, echo=FALSE}
+source("D:\\MyR\\jijin\\bond_draw_individual_fund_return_curve.R")
+```
+
+### 样本基金与指数的对比
+
+```{r , fig.height=10, fig.width=14, echo=FALSE}
+source("D:\\MyR\\jijin\\bond_draw_individual_index_return_curve.R")
+```
+
+### 样本基金与板块指数的对比
+
+```{r , fig.height=10, fig.width=14, echo=FALSE}
+source("D:\\MyR\\jijin\\bond_produce_fund_monthly_report.R")
+```

@@ -1,0 +1,48 @@
+---
+title: "全国房价跟踪"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 说明
+
+本文基于国家统计局公布的70个大中城市房价数据进行整理出图。
+ 
+
+1）一年以来，北京、厦门的二手住宅出现5%左右的价格回调。南京的二手住宅出现3%左右的价格回调。上海、广州房价保持平稳。
+ 
+2）一年以来，深圳新房出现了3%左右的价格回调，与之相反的是，二手房出现了5%左右的上涨。可能是这个原因促使深圳在3月底推出“三价合一”政策来平抑二手房的涨势。
+ 
+3）一年以来，西安新房、二手房同时出现了10%左右的价格回调，与一线城市对比明显。根据媒体报道，2017年西安出台了“史上最宽松户籍政策”，全年引进各类人才约20.9万人。而西安每年新推出的新房源为10余万套的规模，所以可能短期出现了房源供不应求的情况。
+ 
+4）以70个大中城市房价的密度曲线的中值作为全国平均值来观察，新房在过去20个月的涨幅为15%，二手房为10%。
+
+
+### 70个大中城市二手住宅相比去年同月涨跌情况
+
+```{r , fig.height=10, fig.width=14, echo=FALSE}
+source("D:\\MyR\\house\\produce_map_report_for_house_price.R")
+```
+
+### 70个大中城市房价分布密度跟踪
+
+```{r , fig.height=10, fig.width=14, echo=FALSE}
+source("D:\\MyR\\house\\produce_house_density_report.R")
+```
+
+
+### 热点城市房价跟踪
+
+```{r , fig.height=10, fig.width=18, echo=FALSE}
+source("D:\\MyR\\house\\produce_house_monthly_report.R")
+```
+
+### 热点城市样本楼盘房价跟踪
+
+```{r , fig.height=10, fig.width=18, echo=FALSE}
+# options(width = 300)
+source("D:\\MyR\\house\\produce_fgs_house_monthly_report.R")
+```

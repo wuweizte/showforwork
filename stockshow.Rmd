@@ -1,0 +1,41 @@
+---
+title: "股票型私募基金的业绩跟踪"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 说明
+
+本文基于私募排排网公布的数据进行整理出图。
+ 
+
+1）在2018年3月，参考板块指数市场强度：创业板> 港股通 > 上证 。
+ 
+2）在2018年3月，赤子之心价值基金推荐板块指数市场强度：医药 > 高端装备 > 消费。
+ 
+3）截止到2018年3月底，赤子之心价值基金收益率为1%，跑赢了沪深300，中证500和深证红利。
+ 
+4）截止到2018年3月底，作为趋势型代表的展博1期收益率为-8%。
+ 作为价值型代表的景林稳健基金收益率为-4%。
+
+
+### 样本基金与基金总体的对比
+
+```{r , fig.height=10, fig.width=14, echo=FALSE}
+source("D:\\MyR\\jijin\\stock_draw_individual_fund_return_curve.R")
+```
+
+### 样本基金与指数的对比
+
+```{r , fig.height=10, fig.width=14, echo=FALSE}
+source("D:\\MyR\\jijin\\stock_draw_individual_index_return_curve.R")
+```
+
+### 样本基金与板块指数的对比
+
+```{r , fig.height=10, fig.width=14, echo=FALSE}
+source("D:\\MyR\\jijin\\stock_produce_fund_monthly_report.R")
+```
