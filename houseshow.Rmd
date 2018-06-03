@@ -12,37 +12,134 @@ knitr::opts_chunk$set(echo = TRUE)
 本文基于国家统计局公布的70个大中城市房价数据进行整理出图。
  
 
-1）一年以来，北京、厦门的二手住宅出现5%左右的价格回调。南京的二手住宅出现3%左右的价格回调。上海、广州房价保持平稳。
+1）一年以来，一线城市房价情况：北京二手住宅出现5%左右的价格回调。上海二手住宅出现3%左右的价格回调。广州房价保持平稳。深圳二手房出现了5%左右的上涨。值得关注的是：北京从2015年起、上海从2013年起就停止了人口的趋势性增长而变成围绕均值小幅波动，而广州、深圳则维持着每年增加50万人的规模。
+
+2）一年以来，深圳新房出现了3%左右的价格回调，与之相反的是，二手房出现了5%左右的上涨。可能是这个原因促使深圳在3月底推出“三价合一”政策来平抑二手房的涨势。由于深圳房市以存量房为主，所以二手房价格走势代表了市场主流走势。新房、二手房价格倒挂体现了新房价格被扭曲的可能，不过，这也从侧面反映了管理层抑制房价膨胀的决心。
+
+3）一年以来，二线城市房价情况：厦门的二手住宅出现5%左右的价格回调。南京的二手住宅出现3%左右的价格回调。西安二手房出现则了10%左右的价格增长。
+
+4）一年以来，西安新房、二手房同时出现了10%左右的价格上涨，与一线城市对比明显。根据媒体报道，2017年西安出台了“史上最宽松户籍政策”，全年引进各类人才约20.9万人。而西安每年新推出的新房源为10余万套的规模，所以可能短期出现了房源供不应求的情况。
  
-2）一年以来，深圳新房出现了3%左右的价格回调，与之相反的是，二手房出现了5%左右的上涨。可能是这个原因促使深圳在3月底推出“三价合一”政策来平抑二手房的涨势。
- 
-3）一年以来，西安新房、二手房同时出现了10%左右的价格回调，与一线城市对比明显。根据媒体报道，2017年西安出台了“史上最宽松户籍政策”，全年引进各类人才约20.9万人。而西安每年新推出的新房源为10余万套的规模，所以可能短期出现了房源供不应求的情况。
- 
-4）以70个大中城市房价的密度曲线的中值作为全国平均值来观察，新房在过去20个月的涨幅为15%，二手房为10%。
+5）以70个大中城市房价的密度曲线的中值作为全国平均值来观察，新房在过去20个月的涨幅为15%，二手房为10%，买房的保值增值作用明显。
+
+6）全国商品房待售面积累计同比增速处于历史低位，一方面说明去库存成效明显，另一方面说明出现供不应求的矛盾了，不利于刚需选房买房。为了抑制需求，预计全国房地产限购政策会维持到2019年下半年。
 
 
 ### 70个大中城市二手住宅相比去年同月涨跌情况
 
-```{r , fig.height=10, fig.width=14, echo=FALSE}
+```{r , fig.height=10, fig.width=14, echo=FALSE,eval=FALSE,fig.show='hide'}
 source("D:\\MyR\\house\\produce_map_report_for_house_price.R")
 ```
 
+```{r , fig.height=9, fig.width=15,echo=FALSE,eval=FALSE}
+library("png")
+
+img <- readPNG("D:\\MyR\\house\\produce_map_report_for_house_price.png")
+
+op <- par(mar = c(0,0,0,0))
+
+ plot(1, xlim = c(0,1000),ylim = c(0,600),type='n', axes = FALSE, bty = "n",
+      xlab = "", ylab = "")
+
+ rasterImage(img, 0, 0, 1000, 600)
+ 
+ par(op)
+```
+
+```{r , fig.height=9, fig.width=15,echo=FALSE,eval=FALSE}
+library("png")
+
+img <- readPNG("D:\\MyR\\house\\produce_map_report_for_house_price_descending.png")
+
+op <- par(mar = c(0,0,0,0))
+
+ plot(1, xlim = c(0,1000),ylim = c(0,600),type='n', axes = FALSE, bty = "n",
+      xlab = "", ylab = "")
+
+ rasterImage(img, 0, 0, 1000, 600)
+ 
+ par(op)
+```
+
+北京、南京、上海、厦门相比上年同月，二手房价出现下降迹象。
+
 ### 70个大中城市房价分布密度跟踪
 
-```{r , fig.height=10, fig.width=14, echo=FALSE}
+```{r , fig.height=10, fig.width=14, echo=FALSE,eval=FALSE,fig.show='hide'}
 source("D:\\MyR\\house\\produce_house_density_report.R")
 ```
 
+```{r , fig.height=9, fig.width=15,echo=FALSE,eval=FALSE}
+library("png")
+
+img <- readPNG("D:\\MyR\\house\\produce_house_density_report.png")
+
+op <- par(mar = c(0,0,0,0))
+
+ plot(1, xlim = c(0,1000),ylim = c(0,600),type='n', axes = FALSE, bty = "n",
+      xlab = "", ylab = "")
+
+ rasterImage(img, 0, 0, 1000, 600)
+ 
+ par(op)
+```
+
+以70个大中城市房价的密度曲线的中值作为全国平均值来观察，新房在过去20个月的涨幅为15%，二手房为10%，买房的保值增值作用明显。
 
 ### 热点城市房价跟踪
 
-```{r , fig.height=10, fig.width=18, echo=FALSE}
+```{r , fig.height=10, fig.width=18, echo=FALSE,eval=FALSE, fig.show='hide'}
 source("D:\\MyR\\house\\produce_house_monthly_report.R")
 ```
 
+```{r , fig.height=9, fig.width=15,echo=FALSE,eval=FALSE}
+library("png")
+
+img <- readPNG("D:\\MyR\\house\\produce_house_monthly_report.png")
+
+op <- par(mar = c(0,0,0,0))
+
+ plot(1, xlim = c(0,1000),ylim = c(0,600),type='n', axes = FALSE, bty = "n",
+      xlab = "", ylab = "")
+
+ rasterImage(img, 0, 0, 1000, 600)
+ 
+ par(op)
+```
+
+一年以来，一线城市房价情况：北京二手住宅出现5%左右的价格回调。上海二手住宅出现3%左右的价格回调。广州房价保持平稳。值得关注的是：北京从2015年起、上海从2013年起就停止了人口的趋势性增长而变成围绕均值小幅波动，而广州、深圳则维持着每年增加50万人的规模。
+
+一年以来，深圳新房出现了3%左右的价格回调，与之相反的是，二手房出现了5%左右的上涨。可能是这个原因促使深圳在3月底推出“三价合一”政策来平抑二手房的涨势。由于深圳房市以存量房为主，所以二手房价格走势代表了市场主流走势。新房、二手房价格倒挂体现了新房价格被扭曲的可能，不过，这也从侧面反映了管理层抑制房价膨胀的决心。
+
+一年以来，二线城市房价情况：厦门的二手住宅出现5%左右的价格回调。南京的二手住宅出现3%左右的价格回调。
+
+一年以来，西安新房、二手房同时出现了10%左右的价格上涨，与一线城市对比明显。根据媒体报道，2017年西安出台了“史上最宽松户籍政策”，全年引进各类人才约20.9万人。而西安每年新推出的新房源为10余万套的规模，所以可能短期出现了房源供不应求的情况。
+
+
 ### 热点城市样本楼盘房价跟踪
 
-```{r , fig.height=10, fig.width=18, echo=FALSE}
+```{r , fig.height=10, fig.width=18, echo=FALSE,eval=TRUE}
 # options(width = 300)
-source("D:\\MyR\\house\\produce_fgs_house_monthly_report.R")
+suppressWarnings(source("D:\\MyR\\house\\produce_fgs_house_monthly_report.R"))
+```
+
+```{r , fig.height=9, fig.width=15,echo=FALSE,eval=TRUE}
+library("png")
+
+img <- readPNG("D:\\MyR\\house\\produce_fgs_house_monthly_report.png")
+
+op <- par(mar = c(0,0,0,0))
+
+ plot(1, xlim = c(0,1000),ylim = c(0,600),type='n', axes = FALSE, bty = "n",
+      xlab = "", ylab = "")
+
+ rasterImage(img, 0, 0, 1000, 600)
+ 
+ par(op)
+```
+
+### 全国商品房销售/待售面积跟踪
+```{r , fig.height=10, fig.width=18, echo=FALSE,eval=FALSE}
+# options(width = 300)
+source("D:\\MyR\\house\\produce_mianji.R")
 ```

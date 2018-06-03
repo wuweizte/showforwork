@@ -11,29 +11,83 @@ knitr::opts_chunk$set(echo = TRUE)
 
 本文基于私募排排网公布的数据进行整理出图。
  
+1）在2018年4月，由于贸易战的影响，沪深300指数继续下探。而中国十年期国债利率延续年初开始的下行趋势，显示市场对中国债券的偏好。SHIBOR延续下跌，显示资金面宽松。以上有利因素推动中证全债指数的一路走高。 
 
-1）在2018年3月，参考板块指数市场强度：中证全债指数> 沪深300指数 。所以同是混合型基金，高配债券的国泰双利基金、鹏华信用基金明显跑赢高配股票的东方红京东大数据基金和招商制造混合基金。
+2）在2018年4月，参考板块指数市场强度：中证全债指数> 沪深300指数 。所以同是混合型基金，高配债券的国泰双利基金、鹏华信用基金明显跑赢高配股票的东方红京东大数据基金和招商制造混合基金。
  
-2）在2018年3月，SHIBOR延续下跌，显示资金面宽松；美元兑换人民币汇率延续下跌，显示人民币延续升值。所以配置美元债券的华安美元基金与鹏华全球基金明显弱势。
+3）在2018年4月，美元兑换人民币汇率保持平稳；但美国十年期国债利率飙升，显示投资者对美国债券的兴趣偏冷。所以配置美元债券的华安美元基金与鹏华全球基金明显弱势。
  
-3）截止到2018年3月底，国债、金融债与企业债板块涨幅趋同。
- 
+4）从收益分布密度曲线的向右移动轨迹可看出，今年以来债券型基金总体业绩是维持一个上升的趋势。
 
 
-### 样本基金与基金总体的对比
+### 样本基金与基金总体业绩的对比
 
-```{r , fig.height=10, fig.width=14, echo=FALSE}
+```{r , fig.height=9, fig.width=12,echo=FALSE,fig.show='hide',eval=TRUE}
 source("D:\\MyR\\jijin\\bond_draw_individual_fund_return_curve.R")
 ```
 
+
+```{r , fig.height=9, fig.width=15,echo=FALSE,eval=TRUE}
+library("png")
+
+img <- readPNG("D:\\MyR\\jijin\\bond_draw_individual_fund_return_curve.png")
+
+op <- par(mar = c(0,0,0,0))
+
+ plot(1, xlim = c(0,1000),ylim = c(0,600),type='n', axes = FALSE, bty = "n",
+      xlab = "", ylab = "")
+
+ rasterImage(img, 0, 0, 1000, 600)
+ 
+ par(op)
+```
+
+在2018年4月，参考板块指数市场强度：中证全债指数> 沪深300指数 。所以同是混合型基金，高配债券的国泰双利基金、鹏华信用基金明显跑赢高配股票的东方红京东大数据基金和招商制造混合基金。
+
+在2018年4月，美元兑换人民币汇率保持平稳；但美国十年期国债利率飙升，显示投资者对美国债券的兴趣偏冷。所以配置美元债券的华安美元基金与鹏华全球基金明显弱势。
+
+
 ### 样本基金与指数的对比
 
-```{r , fig.height=10, fig.width=14, echo=FALSE}
+```{r , fig.height=10, fig.width=14, echo=FALSE,eval=TRUE,fig.show='hide'}
 source("D:\\MyR\\jijin\\bond_draw_individual_index_return_curve.R")
 ```
 
-### 样本基金与板块指数的对比
+```{r , fig.height=9, fig.width=15,echo=FALSE,eval=TRUE}
+library("png")
+img <- readPNG("D:\\MyR\\jijin\\bond_draw_individual_index_return_curve.png")
 
-```{r , fig.height=10, fig.width=14, echo=FALSE}
+op <- par(mar = c(0,0,0,0))
+
+ plot(1, xlim = c(0,1000),ylim = c(0,600),type='n', axes = FALSE, bty = "n",
+      xlab = "", ylab = "")
+
+ rasterImage(img, 0, 0, 1000, 600)
+ 
+ par(op)
+```
+
+在2018年4月，由于贸易战的影响，沪深300指数继续下探。而中国十年期国债利率延续年初开始的下行趋势，显示市场对中国债券的偏好。SHIBOR延续下跌，显示资金面宽松。以上有利因素推动中证全债指数的一路走高。 
+
+
+### 样本基金与利率汇率的对比
+
+```{r , fig.height=10, fig.width=14, echo=FALSE,eval=TRUE, fig.show='hide'}
 source("D:\\MyR\\jijin\\bond_produce_fund_monthly_report.R")
 ```
+
+```{r , fig.height=9, fig.width=15,echo=FALSE,eval=TRUE}
+library("png")
+img <- readPNG("D:\\MyR\\jijin\\bond_produce_fund_monthly_report.png")
+
+op <- par(mar = c(0,0,0,0))
+
+ plot(1, xlim = c(0,1000),ylim = c(0,600),type='n', axes = FALSE, bty = "n",
+      xlab = "", ylab = "")
+
+ rasterImage(img, 0, 0, 1000, 600)
+ 
+ par(op)
+```
+
+从收益分布密度曲线的向右移动轨迹可看出，今年以来债券型基金总体业绩是维持一个上升的趋势。
