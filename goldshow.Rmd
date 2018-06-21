@@ -12,11 +12,11 @@ knitr::opts_chunk$set(echo = TRUE)
 本文基于黄金的KDJ指标和复合收益率，综合用Arima和apARCH模型建模预测，然后整理出图。
  
 
-1）在2018年4月第3周，周线kdj粘合，随时死叉，月线kdj 2个月后顶部死叉。
+1）在2018年6月第1周，周线kdj 预计马上底部金叉，存在中线做多机会；月线kdj 随时可能反转出现金叉。
  
-2）从月复合收益率来看，估计本月黄金维持在1275-1390之间(即正负一个sigma)震荡。
+2）从月复合收益率来看，估计本月黄金维持在1250-1370之间(即正负一个sigma)震荡。
  
-3）从周复合收益率来看，估计本周黄金维持在1310-1361之间(即正负一个sigma)震荡。
+3）从周复合收益率来看，估计本周黄金维持在1270-1320之间(即正负一个sigma)震荡。
 
 4）最近一年黄金的周复合收益率都没有触及2倍标准差区间线，波动率有所收窄，依靠价格波动获利的机会较少。 
 
@@ -25,23 +25,42 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### 2.1 黄金的KDJ月线走势预测
 
-说明：最右端的淡蓝色线与红色线分别为KDJ.D与KDJ.K的向前5月预测
+说明：最右端的淡蓝色线与红色线分别为KDJ.D与KDJ.K的向前5月预测。
 
-```{r , fig.height=10, fig.width=14, echo=FALSE}
+```{r , fig.height=10, fig.width=14, echo=FALSE,eval=TRUE,fig.show='hide'}
 source("D:\\MyR\\stock\\PrepareDataAndDrawMonthlyKDJDPlot.R")
 ```
 
+```{r , fig.height=11, fig.width=15,echo=FALSE,eval=TRUE}
+library("png")
+
+img <- readPNG("D:\\MyR\\stock\\PrepareDataAndDrawMonthlyKDJDPlot.png")
+
+op <- par(mar = c(0,0,0,0))
+
+ plot(1, xlim = c(0,1000),ylim = c(0,800),type='n', axes = FALSE, bty = "n",
+      xlab = "", ylab = "")
+
+ rasterImage(img, 0, 0, 1000, 800)
+ 
+ par(op)
+```
+
+月线kdj 下降速度缓慢，随时可能反转出现金叉。
+
 ### 2.2 黄金的本月价格波动区间预测
 
-说明：依据Arima模型对黄金的月复合收益率建模，然后对金价进行预测
+说明：依据Arima模型对黄金的月复合收益率建模，然后对金价进行预测。
 
-```{r , fig.height=3, fig.width=5, echo=FALSE}
+```{r , fig.height=3, fig.width=5, echo=FALSE,eval=TRUE}
 source("D:\\MyR\\stock\\PrepareDataAndComputePriceRangeForNextMonth.R")
 ```
 
+从月复合收益率来看，估计本月黄金维持在1250-1370之间(即正负一个sigma)震荡。
+
 ### 2.3 黄金月收益率的历史波动情况回溯
 
-```{r , fig.height=2, fig.width=9, echo=FALSE}
+```{r , fig.height=2, fig.width=9, echo=FALSE,eval=TRUE}
 source("D:\\MyR\\stock\\PrepareDataAndShowRecentMonthSituation.R")
 ```
 
@@ -49,26 +68,62 @@ source("D:\\MyR\\stock\\PrepareDataAndShowRecentMonthSituation.R")
 
 ### 3.1 黄金的KDJ周线走势预测
 
-说明：最右端的淡蓝色线与红色线分别为KDJ.D与KDJ.K的向前5周预测
+说明：最右端的淡蓝色线与红色线分别为KDJ.D与KDJ.K的向前5周预测。
 
-```{r , fig.height=10, fig.width=14, echo=FALSE}
+```{r , fig.height=10, fig.width=14, echo=FALSE,eval = TRUE, fig.show='hide'}
 source("D:\\MyR\\stock\\PrepareDataAndDrawWeeklyKDJDPlot.R")
 ```
 
+```{r , fig.height=11, fig.width=15,echo=FALSE,eval = TRUE}
+library("png")
+
+img <- readPNG("D:\\MyR\\stock\\PrepareDataAndDrawWeeklyKDJDPlot.png")
+
+op <- par(mar = c(0,0,0,0))
+
+ plot(1, xlim = c(0,1000),ylim = c(0,800),type='n', axes = FALSE, bty = "n",
+      xlab = "", ylab = "")
+
+ rasterImage(img, 0, 0, 1000, 800)
+ 
+ par(op)
+```
+
+2018年6月第1周，周线kdj 预计马上底部金叉，存在中线做多机会。
+
 ### 3.2 黄金的本周价格波动区间预测
 
-说明：依据apARCH模型对黄金的周复合收益率建模，然后对金价进行预测
+说明：依据apARCH模型对黄金的周复合收益率建模，然后对金价进行预测。
 
-```{r , fig.height=3, fig.width=5, cache=TRUE,echo=FALSE}
+```{r , fig.height=3, fig.width=5, cache=TRUE,echo=FALSE,eval=TRUE}
 source("D:\\MyR\\stock\\PrepareDataAndComputePriceRangeForNextWeek.R")
 ```
 
+从周复合收益率来看，估计本周黄金维持在1270-1320之间(即正负一个sigma)震荡。
+
 ### 3.3 黄金周收益率的历史波动情况回溯
 
-```{r , fig.height=2, fig.width=9, cache=TRUE,echo=FALSE}
+```{r , fig.height=2, fig.width=9, cache=TRUE,echo=FALSE,eval=TRUE}
 source("D:\\MyR\\stock\\PrepareDataAndShowRecentWeekSituation.R")
 ```
 
-```{r , fig.height=10, fig.width=14, cache=TRUE,echo=FALSE}
+```{r , fig.height=10, fig.width=14, cache=TRUE,echo=FALSE,eval=TRUE,fig.show='hide'}
 source("D:\\MyR\\stock\\PrepareDataAndShowWeeklyConfidenceInterval.R")
 ```
+
+```{r , fig.height=11, fig.width=15,echo=FALSE,eval=TRUE}
+library("png")
+
+img <- readPNG("D:\\MyR\\stock\\PrepareDataAndShowWeeklyConfidenceInterval.png")
+
+op <- par(mar = c(0,0,0,0))
+
+ plot(1, xlim = c(0,1000),ylim = c(0,800),type='n', axes = FALSE, bty = "n",
+      xlab = "", ylab = "")
+
+ rasterImage(img, 0, 0, 1000, 800)
+ 
+ par(op)
+```
+
+最近一年黄金的周复合收益率都没有触及2倍标准差区间线，波动率有所收窄，依靠价格波动获利的机会较少。 
