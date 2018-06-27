@@ -1,0 +1,239 @@
+---
+title: "BARRA模型选股的月度业绩"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+### 业绩月度变化示意图（2012年）
+
+```{r , fig.height=10, fig.width=14, echo=FALSE,fig.show='hide',eval=TRUE}
+rm(list = ls())
+
+library(grid)
+suppressMessages(library(gridExtra))
+library(ggplot2)
+library(RColorBrewer)
+
+
+load("D:\\MyR\\quantprog\\forAstockbefore20110830\\eleven_factor_val_lnmv_threshold\\result.comparison")
+```
+
+```{r , fig.height=6, fig.width=11, echo=FALSE}
+
+selected.stock.cum.return <- (exp(cumsum(result.comparison[1:12,1]) / 100) - 1) * 100
+hushen300.cum.return <- (exp(cumsum(result.comparison[1:12,2]) / 100) - 1) * 100
+
+ylim.min <- min(selected.stock.cum.return, hushen300.cum.return)
+ylim.max <- max(selected.stock.cum.return, hushen300.cum.return)
+
+plot(selected.stock.cum.return,
+     type = "o",
+     col = "red",
+     axes = FALSE,
+     xlab = "",
+     ylab = "累计收益(%)",
+     ylim = c(ylim.min,ylim.max))
+
+lines(hushen300.cum.return,type = "o",col = "blue")
+
+axis(1, at = 1:12, labels = paste0("2012-",1:12))
+
+axis(2,las = 1)
+
+legend("topleft",
+       legend = c("模型选择的股票组合","沪深300"),
+       col = c("red",'blue'),
+       lty = 1,
+       ncol = 3,
+       bty = "n"
+)
+
+box()
+
+```
+
+### 业绩月度变化示意图（2013年）
+
+```{r , fig.height=6, fig.width=11, echo=FALSE}
+
+selected.stock.cum.return <- (exp(cumsum(result.comparison[13:24,1]) / 100) - 1) * 100
+hushen300.cum.return <- (exp(cumsum(result.comparison[13:24,2]) / 100) - 1) * 100
+
+ylim.min <- min(selected.stock.cum.return, hushen300.cum.return)
+ylim.max <- max(selected.stock.cum.return, hushen300.cum.return)
+
+plot(selected.stock.cum.return,
+     type = "o",
+     col = "red",
+     axes = FALSE,
+     xlab = "",
+     ylab = "累计收益(%)",
+     ylim = c(ylim.min,ylim.max))
+
+lines(hushen300.cum.return,type = "o",col = "blue")
+
+axis(1, at = 1:12, labels = paste0("2013-",1:12))
+
+axis(2,las = 1)
+
+legend("topleft",
+       legend = c("模型选择的股票组合","沪深300"),
+       col = c("red",'blue'),
+       lty = 1,
+       ncol = 3,
+       bty = "n"
+)
+
+box()
+
+```
+
+### 业绩月度变化示意图（2014年）
+
+```{r , fig.height=6, fig.width=11, echo=FALSE}
+
+selected.stock.cum.return <- (exp(cumsum(result.comparison[25:36,1]) / 100) - 1) * 100
+hushen300.cum.return <- (exp(cumsum(result.comparison[25:36,2]) / 100) - 1) * 100
+
+ylim.min <- min(selected.stock.cum.return, hushen300.cum.return)
+ylim.max <- max(selected.stock.cum.return, hushen300.cum.return)
+
+plot(selected.stock.cum.return,
+     type = "o",
+     col = "red",
+     axes = FALSE,
+     xlab = "",
+     ylab = "累计收益(%)",
+     ylim = c(ylim.min,ylim.max))
+
+lines(hushen300.cum.return,type = "o",col = "blue")
+
+axis(1, at = 1:12, labels = paste0("2014-",1:12))
+
+axis(2,las = 1)
+
+legend("topleft",
+       legend = c("模型选择的股票组合","沪深300"),
+       col = c("red",'blue'),
+       lty = 1,
+       ncol = 3,
+       bty = "n"
+)
+
+box()
+
+```
+
+### 业绩月度变化示意图（2015年）
+
+```{r , fig.height=6, fig.width=11, echo=FALSE}
+
+selected.stock.cum.return <- (exp(cumsum(result.comparison[37:48,1]) / 100) - 1) * 100
+hushen300.cum.return <- (exp(cumsum(result.comparison[37:48,2]) / 100) - 1) * 100
+
+ylim.min <- min(selected.stock.cum.return, hushen300.cum.return)
+ylim.max <- max(selected.stock.cum.return, hushen300.cum.return)
+
+plot(selected.stock.cum.return,
+     type = "o",
+     col = "red",
+     axes = FALSE,
+     xlab = "",
+     ylab = "累计收益(%)",
+     ylim = c(ylim.min,ylim.max))
+
+lines(hushen300.cum.return,type = "o",col = "blue")
+
+axis(1, at = 1:12, labels = paste0("2015-",1:12))
+
+axis(2,las = 1)
+
+legend("topleft",
+       legend = c("模型选择的股票组合","沪深300"),
+       col = c("red",'blue'),
+       lty = 1,
+       ncol = 3,
+       bty = "n"
+)
+
+box()
+
+```
+
+### 业绩月度变化示意图（2016年）
+
+```{r , fig.height=6, fig.width=11, echo=FALSE}
+
+selected.stock.cum.return <- (exp(cumsum(result.comparison[49:60,1]) / 100) - 1) * 100
+hushen300.cum.return <- (exp(cumsum(result.comparison[49:60,2]) / 100) - 1) * 100
+
+ylim.min <- min(selected.stock.cum.return, hushen300.cum.return)
+ylim.max <- max(selected.stock.cum.return, hushen300.cum.return)
+
+plot(selected.stock.cum.return,
+     type = "o",
+     col = "red",
+     axes = FALSE,
+     xlab = "",
+     ylab = "累计收益(%)",
+     ylim = c(ylim.min,ylim.max))
+
+lines(hushen300.cum.return,type = "o",col = "blue")
+
+axis(1, at = 1:12, labels = paste0("2016-",1:12))
+
+axis(2,las = 1)
+
+legend("topleft",
+       legend = c("模型选择的股票组合","沪深300"),
+       col = c("red",'blue'),
+       lty = 1,
+       ncol = 3,
+       bty = "n"
+)
+
+box()
+
+```
+
+### 业绩月度变化示意图（2017年）
+
+```{r , fig.height=6, fig.width=11, echo=FALSE}
+
+selected.stock.cum.return <- (exp(cumsum(result.comparison[61:72,1]) / 100) - 1) * 100
+hushen300.cum.return <- (exp(cumsum(result.comparison[61:72,2]) / 100) - 1) * 100
+
+ylim.min <- min(selected.stock.cum.return, hushen300.cum.return)
+ylim.max <- max(selected.stock.cum.return, hushen300.cum.return)
+
+plot(selected.stock.cum.return,
+     type = "o",
+     col = "red",
+     axes = FALSE,
+     xlab = "",
+     ylab = "累计收益(%)",
+     ylim = c(ylim.min,ylim.max))
+
+lines(hushen300.cum.return,type = "o",col = "blue")
+
+axis(1, at = 1:12, labels = paste0("2017-",1:12))
+
+axis(2,las = 1)
+
+legend("topleft",
+       legend = c("模型选择的股票组合","沪深300"),
+       col = c("red",'blue'),
+       lty = 1,
+       ncol = 3,
+       bty = "n"
+)
+
+box()
+
+```
+

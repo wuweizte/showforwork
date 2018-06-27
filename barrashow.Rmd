@@ -1,0 +1,186 @@
+---
+title: "BARRA选股模型的业绩分析"
+author: "吴 炜"
+date: "2018-6"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### 1 说明及结论
+
+笔者参考证券公司对外发布的文章、理论书籍与网上资料，借助万德数据库，用R建立了一个BARRA选股模型，每月更新一次股票仓位。
+
+从数据回测的结果来看，从2012到2017共6年时间，有5年时间BARRA模型选股组合的年收益率是超过沪深300指数的年收益和私募排排网上公布的千只以上股票型私募基金的年度业绩中值的。
+
+量化基金值得在牛市中配置，建议在2020年美联储结束加息或中国开始降息时就开始配置，并视业绩变化而调整配置权重。
+
+### 2 投资收益对比（2012-2017）
+
+```{r , fig.height=10, fig.width=14, echo=FALSE,fig.show='hide',eval=TRUE}
+rm(list = ls())
+
+library(grid)
+suppressMessages(library(gridExtra))
+library(ggplot2)
+library(RColorBrewer)
+
+
+load("D:\\MyR\\quantprog\\forAstockbefore20110830\\eleven_factor_val_lnmv_threshold\\result.comparison")
+```
+
+```{r,echo=FALSE}
+return.2012 <- apply(head(result.comparison,12),2,sum)
+return.2013 <- apply(result.comparison[13:24,],2,sum)
+return.2014 <- apply(result.comparison[25:36,],2,sum)
+return.2015 <- apply(result.comparison[37:48,],2,sum)
+return.2016 <- apply(result.comparison[49:60,],2,sum)
+return.2017 <- apply(result.comparison[61:72,],2,sum)
+
+return <- rbind(return.2012,
+                return.2013,
+                return.2014,
+                return.2015,
+                return.2016,
+                return.2017)
+```
+
+
+```{r,echo=FALSE}
+return.simple <- (exp(return / 100) - 1) * 100
+
+return.simple <- round(return.simple,digits = 2)
+
+simu.median <- c(1.58, 11.38, 25.95, 31.52, -5.92, 8.09)
+
+return.simple <- cbind(return.simple, simu.median)
+```
+
+```{r,echo=FALSE}
+df.return.simple <- data.frame(year = 2012:2017, type = "BARRA模型选股组合", return = return.simple[,1])
+
+df.return.simple <- rbind(df.return.simple, data.frame(year = 2012:2017, type = "沪深300", return = return.simple[,2]))
+
+df.return.simple <- rbind(df.return.simple, data.frame(year = 2012:2017, type = "私募基金业绩中值", return = return.simple[,3]))
+
+# colnames(df.return.simple)[2] <- "类别"
+```
+
+```{r , fig.height=9, fig.width=15,echo=FALSE,eval=TRUE}
+
+p <- ggplot(df.return.simple, aes(x = year, y = return, colour = type, fill = type)) +
+        geom_bar(position = "dodge", stat = "identity",alpha = .5) 
+
+# p <- p + scale_colour_manual(values = arg.colorgroup) +
+#         scale_fill_manual(values = arg.colorgroup)
+
+p <- p + geom_text(aes(label = paste(round(return,digits = 2),"%",sep = ""),
+                       vjust = -1.2 * sign(return)),
+                   position = position_dodge(.9),
+                   size = 4,
+                   colour = "black", 
+                   hjust = 0.4) +
+        xlab("年份") +
+        ylab("收益(%)") +
+        scale_x_continuous(breaks = 2012:2017,labels = 2012:2017) + 
+        theme(legend.text = element_text(size = 12),
+              axis.text.x = element_text(size = 14),
+              axis.title.x = element_text(size = 16),
+              axis.text.y = element_text(size = 14),
+              axis.title.y = element_text(size = 16)) #+
+        
+# 
+        # coord_cartesian(ylim = arg.ylim)
+
+print(p)
+```
+
+```{r,echo=FALSE}
+compound.return <- apply(return.simple,2,function(x){
+        round((exp(sum(log(1 + x/100))) - 1) * 100, digits = 2)
+})
+
+return.simple <- rbind(return.simple, compound.return)
+
+return.simple.percent <- paste0(return.simple,"%")
+return.simple.percent <- matrix(return.simple.percent, dim(return.simple)[1],dim(return.simple)[2])
+
+
+colnames(return.simple.percent) <- c("BARRA模型选股组合", "沪深300", "私募基金业绩中值")
+row.names(return.simple.percent) <- c(paste0(2012:2017,"年收益率"),
+                              "考虑复利情况下的总收益率")
+```
+
+```{r,echo=FALSE, fig.height=4, fig.width=7}
+
+g <- tableGrob(return.simple.percent)
+grid.newpage()
+grid.draw(g)
+```
+
+
+从数据回测的结果来看，从2012到2017共6年时间，有5年时间BARRA模型选股组合的收益率是超过沪深300指数的年收益率和私募排排网上公布的千只以上股票型私募基金的年收益率中值。也就是说，在过去6年里，BARRA模型选股组合有5年战胜了被动投资者和平均水平的主动投资者。
+
+证券公司对外发布的文章提到，要对指数做对冲，只追求跑赢指数的alpha收益，不过从模型回测的结果来看，直接追求绝对收益也是可行的，好年景时获得的高收益完全可以弥补差年景时的亏损。
+
+### 3 BARRA模型投资组合详细记录
+
+<a href="http://rpubs.com/wuweizte/399200" target="_blank">2012年投资组合详细记录网页链接</a>
+
+<a href="http://rpubs.com/wuweizte/399205" target="_blank">2013年投资组合详细记录网页链接</a>
+
+<a href="http://rpubs.com/wuweizte/399208" target="_blank">2014年投资组合详细记录网页链接</a>
+
+<a href="http://rpubs.com/wuweizte/399210" target="_blank">2015年投资组合详细记录网页链接</a>
+
+<a href="http://rpubs.com/wuweizte/399212" target="_blank">2016年投资组合详细记录网页链接</a>
+
+<a href="http://rpubs.com/wuweizte/399214" target="_blank">2017年投资组合详细记录网页链接</a>
+
+
+### 4 BARRA模型投资组合业绩月度变化示意图
+
+<a href="http://rpubs.com/wuweizte/400214" target="_blank">投资组合业绩月度变化示意图网页链接</a>
+
+### 5 量化基金在市场中的历史表现
+
+<a href="https://wallstreetcn.com/articles/3324075" target="_blank">《华尔街见闻》网站上的报道网页链接</a>
+
+从《华尔街见闻》网站上的报道来看，多数量化基金的“2012年以来收益率”也超过了沪深300指数的年收益率和千只以上股票型私募基金的年收益率中值。
+
+量化基金与笔者的BARRA模型选股组合的业绩存在差异，原因可能有：
+
+1）证券公司对外发布的文章提到，要对指数做对冲，只追求跑赢指数的alpha收益，以规避系统性风险。所以市场上的量化基金可能只捕捉了alpha收益。笔者的BARRA模型在计算收益时没考虑对指数做对冲，在不规避系统性风险的前提下捕捉了所有收益；
+
+2）文中列出的BARRA模型选股组合的业绩不是实盘操作业绩，模型统一取股票的每月收盘价作为成交价，与市场上的量化基金在股票交易上存在交易时点与价位的差异；
+
+3）市场上的量化基金在做二次规划定义收益目标与风险目标时有可能引入了比较保守的约束条件。
+
+### 6 量化基金在2017年业绩失色的原因
+
+上文提到《华尔街见闻》网站上的报道已经说明了，主要由于：
+
+1）投资者抱团几只大公司
+
+2）追涨杀跌，反转因子失效
+
+3）量化策略表现好的时间太长了
+
+4）2017年下半年，一些私募产品清盘，造成踩踏 
+
+
+### 附录 参考文献
+
+1. 华泰证券，多因子系列之一：华泰多因子模型体系初探
+
+2. Ruey S. Tsay, Analysis of Financial Time Series
+
+3. Rob J Hyndman, George Athanasopoulos, Forecasting: principles and practice
+
+4. 知乎网 清华大学量化投资协会，【多因子模型】Barra模型讲解
+
+5. Barra，USE3
+
+6. Wind 资讯， Wind R 数据及交易接口

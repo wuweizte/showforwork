@@ -1,0 +1,71 @@
+---
+title: "BARRA模型的按月选股组合(2013年)"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 说明
+
+每月按照BARRA模型输出结果调整一次股票组合。
+
+下文详细记录了在每个月底为下个月准备的投资组合中的前40只股票。
+
+## 股票组合详细记录
+
+```{r , fig.height=10, fig.width=14, echo=FALSE,fig.show='hide',eval=TRUE}
+rm(list = ls())
+library(grid)
+suppressMessages(library(gridExtra))
+
+load("D:\\MyR\\quantprog\\forAstockbefore20110830\\eleven_factor_val_lnmv_threshold\\step.XIII.II.com.prop.list")
+```
+
+
+
+```{r,echo=FALSE, fig.height=12,fig.width=4,cache=TRUE}
+# com.prop.list
+
+# for(i in 1:length(names(com.prop.list))){
+
+# system.time(
+
+        for(i in 13:24){
+        cat(paste0("投资日：",substr(names(com.prop.list)[i],2,9)))
+
+        df <- com.prop.list[[i]]
+        # df <- df[df$prop > 0,]
+        
+        df <- df[order(df$prop,decreasing = TRUE),]
+        df <- head(df,40)
+ 
+        df <- df[,c(3,2)]       
+        # colnames(df) <- c("股票代码","投资比例(%)","股票名称")
+        
+        colnames(df) <- c("股票名称","投资比例(%)")
+        row.names(df) <- NULL
+
+        knitr::opts_hooks$set(fig.height = function(options) {
+
+                options$fig.height = 40
+                options
+        })
+        
+        g <- tableGrob(df)
+        grid.newpage()
+        grid.draw(g)
+        
+}
+        
+# )
+
+```
+
+
+
+
+        
+
+

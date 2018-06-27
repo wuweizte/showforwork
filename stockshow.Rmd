@@ -1,5 +1,7 @@
 ---
 title: "股票型私募基金的业绩跟踪"
+author: "吴 炜"
+date: "2018-6"
 output: html_document
 ---
 

@@ -1,5 +1,7 @@
 ---
 title: "黄金技术指标跟踪"
+author: "吴 炜"
+date: "2018-6"
 output: html_document
 ---
 
@@ -127,3 +129,13 @@ op <- par(mar = c(0,0,0,0))
 ```
 
 最近一年黄金的周复合收益率都没有触及2倍标准差区间线，波动率有所收窄，依靠价格波动获利的机会较少。 
+
+
+### 附录 参考文献
+
+1. Eric Zivot, Univariate GARCH
+
+2. Ruey S. Tsay, Analysis of Financial Time Series
+
+3. Rob J Hyndman, George Athanasopoulos, Forecasting: principles and practice
+

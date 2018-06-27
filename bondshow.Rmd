@@ -1,5 +1,7 @@
 ---
 title: "债券型基金的业绩跟踪"
+author: "吴 炜"
+date: "2018-6"
 output: html_document
 ---
 
@@ -7,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## 说明
+### 说明
 
 本文基于私募排排网公布的数据进行整理出图。
 
